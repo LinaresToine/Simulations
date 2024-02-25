@@ -1,0 +1,18 @@
+The setup for this game is as follows:
+
+A group of multiple players are assigned a role by a game moderator. The role can either be Villager or Warewolf. The moderator assigns two people the role of Wrewolf, while the rest remain Villagers. Only the game moderator knows who is a warewolf.
+
+1. The warewolves goal is to kill all but two villagers (because there are originally two warewolves). The villagers goal is to kill all warewolves.
+2. Every player is blindfolded.
+3. During the night, the moderator asks warewolves to remove their blindfold. The warewolves then choose one villager to kill. The warewolves put their blindfold back on.
+4. During the day, the moderator asks all players to remove blindfolds. He then informs the group of players that such villager has been killed. All players participate in discussing who to blame. After the discussion, one player is removed from the game. Notice that warewolves also participate in this discussion.
+5. Night time comes, warewolves remove blindfold, and go to work.
+6. The game continues until a group of players win.
+
+This game was designed by Dimitri Davidov in 1986. The game provides an interesting example on the power behind information. The informed minority, or the warewolves, have higher chances of winning than the uninformed majority, or the villagers. 
+
+The simulation for this game consists in creating random numbers to decide who to kill during daylight, and removing villagers during night time. 
+
+The goal of this simulation is to study the villager to warewolf ratio that constitutes a fair game. In other words, which villager to warewolf ratio has the villagers winning 50% of the time?
+
+
