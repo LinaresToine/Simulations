@@ -31,6 +31,7 @@ def chooseIndex(playerIndices = None, villagerIndices = None, warewolfAttack = F
 
 def updateIndices(chosenIndex, villagerIndices = None, playerIndices = None):
     """
+    Updates the index lists so that no player is killed twice
     """
     villagerIndices = villagerIndices[villagerIndices != chosenIndex]
     playerIndices = playerIndices[playerIndices != chosenIndex]
@@ -61,7 +62,6 @@ def game(n_games, n_villagers, n_warewolves):
         warewolfIndices = np.where(players == warewolf)[0]
         playerIndices = np.append(villagerIndices, warewolfIndices)
 
-        chosenIndices = np.array([])
         winner = False
         gamesPlayed += 1
 
@@ -79,12 +79,6 @@ def game(n_games, n_villagers, n_warewolves):
             villagerIndices, playerIndices = updateIndices(chosenIndex=chosenPlayerIndex, villagerIndices=villagerIndices, playerIndices=playerIndices)
             
             """
-            Now we keep track of the chosen indices to evaluate that all none are chosen twice
-            """
-            chosenIndices = np.append(chosenIndices, chosenVillagerIndex)
-            chosenIndices = np.append(chosenIndices, chosenPlayerIndex)
-
-            """
             Now we evaluate for winners
             """
             if len(playerIndices) == len(villagerIndices) or not np.isin(warewolfIndices, playerIndices).any():
@@ -100,19 +94,11 @@ def game(n_games, n_villagers, n_warewolves):
 
     return villagerPoints, warewolfPoints
 
-def ratioStudy(n_games, n_warewolves, n_villagers, n_tests): 
-    warewolfVictories = np.zeros(n_tests)
-    villagerVictories = np.zeros(n_tests)
-
-    for i in range(n_tests):
-        villagerPoints, warewolfPoints = game(n_games, n_villagers, n_warewolves)
-        warewolfVictories[i] = warewolfPoints
-        villagerVictories[i] = villagerPoints
-
-    return warewolfVictories, villagerVictories
-
 
 def createPlot(n_games, min_villagers, max_villagers, n_warewolves):
+    """
+    Function to create result graph. Plots villagerVictory and warewolfVictory vs number of villagers for a constant value of warewolves
+    """
     space = int(((max_villagers - min_villagers)/2) + 1)
     x_villagers = np.int64(np.linspace(min_villagers, max_villagers, space))
     warewolfVictory = np.zeros(space)
